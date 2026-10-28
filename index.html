@@ -1,14 +1,781 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="dark">
 <head>
-    <title>My Custom Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHRIYAM CONTROLS - Engineering Innovations | Industrial Automation Solutions</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        industrial: {
+                            50: '#f0f4f8',
+                            100: '#d9e2ec',
+                            500: '#334e68',
+                            800: '#102a43',
+                            900: '#0b1b2b',
+                            accent: '#00d2ff',
+                            electric: '#0284c7',
+                            status: '#10b981'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #f4f4f9; }
-        h1 { color: #333; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b1b2b;
+            color: #f0f4f8;
+        }
+        .mono-text {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b1b2b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #102a43;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0284c7;
+        }
+        /* Grid pattern overlay */
+        .grid-bg {
+            background-image: radial-gradient(rgba(0, 210, 255, 0.12) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
     </style>
 </head>
-<body>
-    <h1>Hello, World! Welcome to my custom GitHub website.</h1>
-    <p>This site is hosted for free on GitHub Pages.</p>
+<body class="min-h-screen flex flex-col justify-between selection:bg-industrial-electric selection:text-white">
+
+    <!-- TOP TELEMETRY BAR -->
+    <div class="bg-industrial-900 border-b border-slate-800 text-xs py-1.5 px-4 mono-text text-slate-400 hidden sm:flex justify-between items-center">
+        <div class="flex items-center space-x-6">
+            <span class="flex items-center"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse inline-block mr-2"></span>SYS_STATUS: ONLINE</span>
+            <span>PROTOCOL: OPC-UA, Modbus</span>
+            <span>LATENCY: &lt;4ms</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <span id="live-clock">2026-10-28 --:--:-- UTC</span>
+            <span class="bg-slate-800 text-cyan-400 px-2 py-0.5 rounded border border-slate-700">v4.2.0-STABLE</span>
+        </div>
+    </div>
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-50 bg-industrial-900/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand / Logo -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 text-white font-bold text-xl border border-cyan-400/30">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <div>
+                        <span class="text-lg font-bold tracking-wider text-white block leading-tight">NEXUS<span class="text-cyan-400">.AUTO</span></span>
+                        <span class="text-[10px] text-slate-400 uppercase tracking-widest block mono-text">Industrial IoT & PLC</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Tabs -->
+                <nav class="hidden md:flex space-x-1 bg-slate-900/80 p-1 rounded-xl border border-slate-800">
+                    <button onclick="switchTab('home')" id="tab-btn-home" class="nav-tab px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-2">
+                        <i class="fa-solid fa-house text-xs"></i>
+                        <span>Home</span>
+                    </button>
+                    <button onclick="switchTab('downloads')" id="tab-btn-downloads" class="nav-tab px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-2">
+                        <i class="fa-solid fa-download text-xs"></i>
+                        <span>Downloads</span>
+                    </button>
+                    <button onclick="switchTab('contact')" id="tab-btn-contact" class="nav-tab px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-2">
+                        <i class="fa-solid fa-headset text-xs"></i>
+                        <span>Contact Us</span>
+                    </button>
+                </nav>
+
+                <!-- Status CTA -->
+                <div class="hidden lg:flex items-center space-x-3">
+                    <button onclick="switchTab('downloads')" class="px-4 py-2 text-xs font-semibold rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20 transition">
+                        <i class="fa-solid fa-code-branch mr-1.5"></i> Firmware Portal
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" onclick="toggleMobileMenu()" class="text-slate-300 hover:text-white p-2">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-industrial-900 border-b border-slate-800 px-4 pt-2 pb-4 space-y-2">
+            <button onclick="switchTab('home'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 flex items-center space-x-3">
+                <i class="fa-solid fa-house text-cyan-400 w-5"></i>
+                <span>Home</span>
+            </button>
+            <button onclick="switchTab('downloads'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 flex items-center space-x-3">
+                <i class="fa-solid fa-download text-cyan-400 w-5"></i>
+                <span>Downloads</span>
+            </button>
+            <button onclick="switchTab('contact'); toggleMobileMenu();" class="w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-800 flex items-center space-x-3">
+                <i class="fa-solid fa-headset text-cyan-400 w-5"></i>
+                <span>Contact Us</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINERS -->
+    <main class="flex-grow">
+
+        <!-- ================= HOME SECTION ================= -->
+        <section id="section-home" class="tab-content transition-opacity duration-300">
+            <!-- Hero Banner -->
+            <div class="relative overflow-hidden grid-bg border-b border-slate-800 py-16 lg:py-24">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7 space-y-6">
+                            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold tracking-wide uppercase">
+                                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                                <span>SHRIYAM CONTROLS</span>
+                            </div>
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                                High-Precision <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">PLC Logic</span> & Industrial IoT Edge
+                            </h1>
+                            <p class="text-slate-300 text-lg leading-relaxed max-w-2xl">
+                                Seamlessly connect legacy SCADA infrastructure with cloud telemetry. We provide robust industrial software drivers, PLC automation suites, and hardware integrations tailored for mission-critical operations.
+                            </p>
+                            <div class="flex flex-wrap gap-4 pt-4">
+                                <button onclick="switchTab('downloads')" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold shadow-lg shadow-cyan-500/25 flex items-center space-x-2 transition">
+                                    <i class="fa-solid fa-download"></i>
+                                    <span>Explore Tools & Drivers</span>
+                                </button>
+                                <button onclick="switchTab('contact')" class="px-6 py-3.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 font-semibold flex items-center space-x-2 transition">
+                                    <i class="fa-solid fa-comments"></i>
+                                    <span>Request System Audit</span>
+                                </button>
+                            </div>
+                            <!-- Quick Specs Badge -->
+                            <div class="grid grid-cols-3 gap-4 pt-8 border-t border-slate-800/80 max-w-lg">
+                                <div>
+                                    <p class="text-2xl font-bold text-cyan-400 mono-text">99.999%</p>
+                                    <p class="text-xs text-slate-400 mt-1">Uptime SLA</p>
+                                </div>
+                                <div>
+                                    <p class="text-2xl font-bold text-cyan-400 mono-text">&lt; 1ms</p>
+                                    <p class="text-xs text-slate-400 mt-1">Cycle Execution</p>
+                                </div>
+                                <div>
+                                    <p class="text-2xl font-bold text-cyan-400 mono-text">50+ Protocols</p>
+                                    <p class="text-xs text-slate-400 mt-1">Modbus, Profinet, Ethernet/IP</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hero Interactive Visual / Console Dashboard -->
+                        <div class="lg:col-span-5">
+                            <div class="bg-slate-900 border border-slate-700/80 rounded-2xl p-5 shadow-2xl relative overflow-hidden">
+                                <!-- Console Header -->
+                                <div class="flex items-center justify-between border-b border-slate-800 pb-3 mb-4">
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                                        <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                                        <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+                                        <span class="text-xs text-slate-400 mono-text ml-2">plc_monitor_node_01</span>
+                                    </div>
+                                    <span class="text-xs px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 mono-text">RUNNING</span>
+                                </div>
+
+                                <!-- Diagnostic Rows -->
+                                <div class="space-y-3 mono-text text-xs">
+                                    <div class="bg-slate-950 p-3 rounded-lg border border-slate-800/80 flex justify-between items-center">
+                                        <span class="text-slate-400"><i class="fa-solid fa-server text-cyan-400 mr-2"></i>PLC CPU Cycle:</span>
+                                        <span class="text-cyan-300 font-bold">0.42 ms [OPTIMAL]</span>
+                                    </div>
+                                    <div class="bg-slate-950 p-3 rounded-lg border border-slate-800/80 flex justify-between items-center">
+                                        <span class="text-slate-400"><i class="fa-solid fa-network-wired text-cyan-400 mr-2"></i>Active Node IO:</span>
+                                        <span class="text-emerald-400 font-bold">1,024 Digital / 256 Analog</span>
+                                    </div>
+                                    <div class="bg-slate-950 p-3 rounded-lg border border-slate-800/80 flex justify-between items-center">
+                                        <span class="text-slate-400"><i class="fa-solid fa-wifi text-cyan-400 mr-2"></i>MQTT Gateway:</span>
+                                        <span class="text-emerald-400 font-bold">Connected (TLS v1.3)</span>
+                                    </div>
+                                    
+                                    <!-- Simulated Pulse Meter -->
+                                    <div class="pt-2">
+                                        <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                                            <span>TELEMETRY STREAM BUS</span>
+                                            <span class="text-cyan-400">98.4 KB/s</span>
+                                        </div>
+                                        <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                                            <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-full w-[85%] animate-pulse"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Terminal Log Snippet -->
+                                <div class="mt-4 p-3 bg-black/60 rounded-lg text-[11px] mono-text text-slate-400 space-y-1 h-28 overflow-y-auto border border-slate-800" id="terminal-log">
+                                    <p class="text-emerald-400">[SYSTEM] Initializing S7-1500 Protocol Stack...</p>
+                                    <p>[OK] Handshake verified at 1000Mbps.</p>
+                                    <p>[IoT] Telemetry engine synced with AWS IoT Core.</p>
+                                    <p class="text-cyan-400">[LIVE] Polling Modbus TCP Register 40001-40100...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Grid Section -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <h2 class="text-3xl font-bold text-white">Core Automation Capabilities</h2>
+                    <p class="text-slate-400 mt-3 text-base">Industrial-grade software and hardware integration tools engineered for maximum reliability and ease of deployment.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Card 1 -->
+                    <div class="bg-slate-900/60 p-8 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-xl mb-6 group-hover:bg-cyan-500 group-hover:text-white transition">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Multi-Brand PLC Logic</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Full compatibility with Siemens, Allen-Bradley, Schneider Electric, Omron, and Beckhoff controllers using standard IEC 61131-3 languages.
+                        </p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-slate-900/60 p-8 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-xl mb-6 group-hover:bg-cyan-500 group-hover:text-white transition">
+                            <i class="fa-solid fa-cloud-nodes"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">IoT Gateway Telemetry</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Input & Output Commissioning tool
+                        </p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-slate-900/60 p-8 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-xl mb-6 group-hover:bg-cyan-500 group-hover:text-white transition">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">SCADA & HMI Engines</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Next product ????.
+                        </p>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="bg-slate-900/60 p-8 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-xl mb-6 group-hover:bg-cyan-500 group-hover:text-white transition">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Industrial Cyber Security</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            PLC Software development.
+                        </p>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="bg-slate-900/60 p-8 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-xl mb-6 group-hover:bg-cyan-500 group-hover:text-white transition">
+                            <i class="fa-solid fa-network-wired"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Fieldbus Converters</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Low-latency translation layers between CANopen, Profibus, Modbus RTU, Ethernet/IP, and PROFINET environments.
+                        </p>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="bg-slate-900/60 p-8 rounded-2xl border border-slate-800 hover:border-cyan-500/50 transition duration-300 group">
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-xl mb-6 group-hover:bg-cyan-500 group-hover:text-white transition">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3">Custom Driver SDK</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Developer kits for C++, Python, and C# to build custom protocols and communicate directly with micro-controllers and PLCs.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= DOWNLOADS SECTION ================= -->
+        <section id="section-downloads" class="tab-content hidden transition-opacity duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <!-- Header Title -->
+                <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-slate-800 pb-8 mb-8 gap-4">
+                    <div>
+                        <h1 class="text-3xl sm:text-4xl font-extrabold text-white">Software & Utility Downloads</h1>
+                        <p class="text-slate-400 mt-2 text-sm sm:text-base">Access official PLC drivers, IoT runtime engines, SCADA packages, and hardware manuals.</p>
+                    </div>
+                    <div class="flex items-center space-x-2 text-xs text-slate-400 bg-slate-900 border border-slate-800 px-3 py-2 rounded-lg self-start md:self-auto">
+                        <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                        <span>SHA-256 Checksums Verified</span>
+                    </div>
+                </div>
+
+                <!-- Search and Filters Bar -->
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-800 mb-8 flex flex-col md:flex-row gap-4 justify-between items-center">
+                    <!-- Search Input -->
+                    <div class="relative w-full md:w-96">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3.5 text-slate-500 text-sm"></i>
+                        <input type="text" id="download-search" oninput="filterDownloads()" placeholder="Search drivers, tools, manuals..." 
+                               class="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition">
+                    </div>
+
+                    <!-- Category Filter Tabs -->
+                    <div class="flex flex-wrap gap-2 w-full md:w-auto">
+                        <button onclick="filterCategory('all')" class="cat-filter-btn px-4 py-2 rounded-lg text-xs font-semibold bg-cyan-500 text-white transition" data-cat="all">All Files</button>
+                        <button onclick="filterCategory('driver')" class="cat-filter-btn px-4 py-2 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition" data-cat="driver">Drivers & SDKs</button>
+                        <button onclick="filterCategory('software')" class="cat-filter-btn px-4 py-2 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition" data-cat="software">Software Tools</button>
+                        <button onclick="filterCategory('manual')" class="cat-filter-btn px-4 py-2 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition" data-cat="manual">Manuals & Specs</button>
+                    </div>
+                </div>
+
+                <!-- Downloads Table/Cards Container -->
+                <div class="space-y-4" id="downloads-list">
+                    <!-- Download Items populated via JS or default markup -->
+                    
+                    <!-- Item 1 -->
+                    <div class="download-item bg-slate-900/80 border border-slate-800 hover:border-slate-700 rounded-xl p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition" data-category="software" data-name="nexus scada studio editor PLC suite">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-desktop"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center space-x-3">
+                                    <h3 class="text-lg font-bold text-white">Nexus SCADA Studio v4.20</h3>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Windows / Linux</span>
+                                </div>
+                                <p class="text-xs text-slate-400 mt-1">Integrated IDE for designing OPC-UA/Modbus HMI screens, logic debugging, and tag management.</p>
+                                <div class="flex items-center space-x-4 text-[11px] text-slate-500 mt-2 mono-text">
+                                    <span><i class="fa-solid fa-hard-drive mr-1"></i>245.8 MB</span>
+                                    <span><i class="fa-solid fa-clock mr-1"></i>Updated: Oct 2026</span>
+                                    <span><i class="fa-solid fa-hashtag mr-1"></i>v4.20.1</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="triggerDownload('Nexus_SCADA_Studio_v4.20.exe')" class="w-full md:w-auto px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-cyan-500 hover:text-white text-cyan-400 border border-slate-700 text-xs font-semibold flex items-center justify-center space-x-2 transition shrink-0">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Download (EXE)</span>
+                        </button>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="download-item bg-slate-900/80 border border-slate-800 hover:border-slate-700 rounded-xl p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition" data-category="driver" data-name="modbus tcp rtu driver pack plc communication">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-network-wired"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center space-x-3">
+                                    <h3 class="text-lg font-bold text-white">Universal Modbus TCP/RTU Driver Pack</h3>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">C++ / Python / C#</span>
+                                </div>
+                                <p class="text-xs text-slate-400 mt-1">High-performance communication drivers supporting master/slave register polling over Serial and Ethernet.</p>
+                                <div class="flex items-center space-x-4 text-[11px] text-slate-500 mt-2 mono-text">
+                                    <span><i class="fa-solid fa-hard-drive mr-1"></i>18.4 MB</span>
+                                    <span><i class="fa-solid fa-clock mr-1"></i>Updated: Sep 2026</span>
+                                    <span><i class="fa-solid fa-hashtag mr-1"></i>v2.8.0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="triggerDownload('Modbus_Driver_Pack_v2.8.zip')" class="w-full md:w-auto px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-emerald-500 hover:text-white text-emerald-400 border border-slate-700 text-xs font-semibold flex items-center justify-center space-x-2 transition shrink-0">
+                            <i class="fa-solid fa-file-zipper"></i>
+                            <span>Download (ZIP)</span>
+                        </button>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="download-item bg-slate-900/80 border border-slate-800 hover:border-slate-700 rounded-xl p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition" data-category="software" data-name="iot edge mqtt gateway agent software firmware">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-lg bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-microchip"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center space-x-3">
+                                    <h3 class="text-lg font-bold text-white">IoT Edge Gateway Runtime Agent</h3>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30">ARM64 / x86_64</span>
+                                </div>
+                                <p class="text-xs text-slate-400 mt-1">Lightweight binary footprint designed for Raspberry Pi, Siemens IOT2050, and industrial edge IPCs.</p>
+                                <div class="flex items-center space-x-4 text-[11px] text-slate-500 mt-2 mono-text">
+                                    <span><i class="fa-solid fa-hard-drive mr-1"></i>62.1 MB</span>
+                                    <span><i class="fa-solid fa-clock mr-1"></i>Updated: Aug 2026</span>
+                                    <span><i class="fa-solid fa-hashtag mr-1"></i>v1.4.2</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="triggerDownload('IoT_Edge_Runtime_ARM64.tar.gz')" class="w-full md:w-auto px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-blue-500 hover:text-white text-blue-400 border border-slate-700 text-xs font-semibold flex items-center justify-center space-x-2 transition shrink-0">
+                            <i class="fa-solid fa-box"></i>
+                            <span>Download (TAR.GZ)</span>
+                        </button>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="download-item bg-slate-900/80 border border-slate-800 hover:border-slate-700 rounded-xl p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition" data-category="manual" data-name="s7 Ethernet IP Profinet hardware specification datasheet manual">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center space-x-3">
+                                    <h3 class="text-lg font-bold text-white">PROFINET & Ethernet/IP Wiring & Setup Guide</h3>
+                                    <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30">PDF Manual</span>
+                                </div>
+                                <p class="text-xs text-slate-400 mt-1">Complete technical manual for topology setup, noise suppression, and baud rate tuning in harsh factory environments.</p>
+                                <div class="flex items-center space-x-4 text-[11px] text-slate-500 mt-2 mono-text">
+                                    <span><i class="fa-solid fa-hard-drive mr-1"></i>8.2 MB</span>
+                                    <span><i class="fa-solid fa-clock mr-1"></i>Updated: Jul 2026</span>
+                                    <span><i class="fa-solid fa-hashtag mr-1"></i>Doc Rev B</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button onclick="triggerDownload('Profinet_Wiring_Manual_2026.pdf')" class="w-full md:w-auto px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-purple-500 hover:text-white text-purple-400 border border-slate-700 text-xs font-semibold flex items-center justify-center space-x-2 transition shrink-0">
+                            <i class="fa-solid fa-file-pdf"></i>
+                            <span>Download (PDF)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Empty state if search finds nothing -->
+                <div id="no-downloads" class="hidden text-center py-16 bg-slate-900/40 rounded-xl border border-slate-800 mt-4">
+                    <i class="fa-solid fa-box-open text-4xl text-slate-600 mb-3"></i>
+                    <p class="text-slate-400 text-sm">No software tools match your filter criteria.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CONTACT US SECTION ================= -->
+        <section id="section-contact" class="tab-content hidden transition-opacity duration-300">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="border-b border-slate-800 pb-8 mb-12">
+                    <h1 class="text-3xl sm:text-4xl font-extrabold text-white">Engineering Support & Contact</h1>
+                    <p class="text-slate-400 mt-2 text-sm sm:text-base">Speak directly with our PLC integration engineers and Industrial IoT solution architects.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <!-- Contact Form -->
+                    <div class="lg:col-span-7 bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-8">
+                        <h2 class="text-xl font-bold text-white mb-6 flex items-center space-x-2">
+                            <i class="fa-solid fa-paper-plane text-cyan-400"></i>
+                            <span>Submit Technical Inquiry</span>
+                        </h2>
+
+                        <!-- Success Alert Message -->
+                        <div id="contact-success" class="hidden mb-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-sm flex items-start space-x-3">
+                            <i class="fa-solid fa-circle-check text-lg mt-0.5"></i>
+                            <div>
+                                <span class="font-bold block">Inquiry Transmitted Successfully!</span>
+                                <span>A automation specialist will review your telemetry & query within 4 business hours. Ticket ID: <span id="ticket-id" class="mono-text font-bold">#PLC-9921</span></span>
+                            </div>
+                        </div>
+
+                        <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Full Name *</label>
+                                    <input type="text" required placeholder="e.g., Alex Mercer" 
+                                           class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Corporate Email *</label>
+                                    <input type="email" required placeholder="alex@factory-corp.com" 
+                                           class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Primary Subject</label>
+                                    <select class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition">
+                                        <option>PLC Programming & Logic Support</option>
+                                        <option>SCADA & HMI Integration</option>
+                                        <option>Industrial IoT Gateway Setup</option>
+                                        <option>Custom Driver Development</option>
+                                        <option>General Hardware Sales Inquiry</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">PLC Hardware Brand</label>
+                                    <select class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition">
+                                        <option>Siemens Simatic (S7-1200 / S7-1500)</option>
+                                        <option>Rockwell / Allen-Bradley ControlLogix</option>
+                                        <option>Schneider Modicon</option>
+                                        <option>Omron / Beckhoff</option>
+                                        <option>Other / Multi-vendor</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">System Details & Requirements *</label>
+                                <textarea rows="4" required placeholder="Describe your industrial setup, IO count, communication protocols, or issues..." 
+                                          class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold rounded-lg shadow-lg shadow-cyan-500/20 transition flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>Send Support Request</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Contact Details & Info Cards -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <!-- Card 1 -->
+                        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-headset"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-base font-bold text-white">24/7 Field Tech Support</h3>
+                                <p class="text-xs text-slate-400 mt-1">For active plant emergencies and priority hotline support:</p>
+                                <p class="text-sm font-semibold text-cyan-400 mono-text mt-2">+1 (800) 555-0199</p>
+                                <p class="text-xs text-slate-500 mt-0.5">support@nexus-automation.io</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex items-start space-x-4">
+                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-building"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-base font-bold text-white">Global Headquarters</h3>
+                                <p class="text-xs text-slate-400 mt-1">Industrial Automation Park, Suite 400</p>
+                                <p class="text-xs text-slate-400">Tech Corridor, CA 94016</p>
+                                <div class="mt-3 inline-block text-[11px] px-2.5 py-1 bg-slate-950 rounded text-slate-400 border border-slate-800">
+                                    <i class="fa-solid fa-clock text-cyan-400 mr-1"></i> Business Hours: 08:00 - 18:00 PST
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Security Note -->
+                        <div class="bg-slate-900/50 border border-slate-800/80 p-6 rounded-2xl">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center">
+                                <i class="fa-solid fa-user-shield text-emerald-400 mr-2"></i> Encrypted Communication
+                            </h4>
+                            <p class="text-xs text-slate-400 leading-relaxed">
+                                All telemetry data and system architectural diagrams shared with our engineering team are protected under standard non-disclosure protocols (NDA) and TLS encrypted channels.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-industrial-900 border-t border-slate-800 text-slate-400 py-8 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-microchip text-cyan-400"></i>
+                <span class="text-slate-300 font-semibold">Nexus Automation Solutions</span>
+                <span>&copy; 2026. All Rights Reserved.</span>
+            </div>
+            <div class="flex space-x-6">
+                <a href="javascript:void(0)" onclick="switchTab('home')" class="hover:text-cyan-400 transition">Home</a>
+                <a href="javascript:void(0)" onclick="switchTab('downloads')" class="hover:text-cyan-400 transition">Downloads</a>
+                <a href="javascript:void(0)" onclick="switchTab('contact')" class="hover:text-cyan-400 transition">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Tab Switcher Logic
+        function switchTab(tabId) {
+            // Hide all tab contents
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Show target tab
+            const target = document.getElementById(`section-${tabId}`);
+            if (target) {
+                target.classList.remove('hidden');
+            }
+
+            // Update Active Styles on Nav Buttons
+            const buttons = document.querySelectorAll('.nav-tab');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-cyan-500', 'text-white', 'shadow-md');
+                btn.classList.add('text-slate-400', 'hover:text-white');
+            });
+
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-slate-400', 'hover:text-white');
+                activeBtn.classList.add('bg-cyan-500', 'text-white', 'shadow-md');
+            }
+
+            // Scroll to top smooth
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Live UTC Clock for Telemetry Bar
+        function updateClock() {
+            const now = new Date();
+            const utcString = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+            const clockEl = document.getElementById('live-clock');
+            if (clockEl) {
+                clockEl.textContent = utcString;
+            }
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Simulated Live Terminal Logs on Hero
+        const logLines = [
+            "[PLC] Modbus TCP Read: Address 40012 -> Value: 894 RPM",
+            "[IoT] Telemetry payload sent: 204 bytes (Success)",
+            "[DIAG] CPU Temperature: 42.1°C (Normal)",
+            "[S7-1500] DB100 block synchronized.",
+          ];
+        let logIndex = 0;
+        setInterval(() => {
+            const logContainer = document.getElementById('terminal-log');
+            if (logContainer) {
+                const newP = document.createElement('p');
+                newP.className = 'text-slate-300';
+                newP.textContent = logLines[logIndex % logLines.length];
+                logContainer.appendChild(newP);
+                logIndex++;
+                if (logContainer.children.length > 8) {
+                    logContainer.removeChild(logContainer.children[0]);
+                }
+                logContainer.scrollTop = logContainer.scrollHeight;
+            }
+        }, 3000);
+
+        // Downloads Filter Logic
+        function filterCategory(cat) {
+            // Highlight filter buttons
+            const buttons = document.querySelectorAll('.cat-filter-btn');
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-cat') === cat) {
+                    btn.classList.remove('bg-slate-800', 'text-slate-300');
+                    btn.classList.add('bg-cyan-500', 'text-white');
+                } else {
+                    btn.classList.remove('bg-cyan-500', 'text-white');
+                    btn.classList.add('bg-slate-800', 'text-slate-300');
+                }
+            });
+
+            const items = document.querySelectorAll('.download-item');
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                const itemCat = item.getAttribute('data-category');
+                if (cat === 'all' || itemCat === cat) {
+                    item.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+
+            checkEmptyDownloads(visibleCount);
+        }
+
+        function filterDownloads() {
+            const query = document.getElementById('download-search').value.toLowerCase();
+            const items = document.querySelectorAll('.download-item');
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                const nameData = item.getAttribute('data-name').toLowerCase();
+                if (nameData.includes(query)) {
+                    item.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+
+            checkEmptyDownloads(visibleCount);
+        }
+
+        function checkEmptyDownloads(count) {
+            const noDownloads = document.getElementById('no-downloads');
+            if (count === 0) {
+                noDownloads.classList.remove('hidden');
+            } else {
+                noDownloads.classList.add('hidden');
+            }
+        }
+
+        // Trigger Sample File Download Notification
+        function triggerDownload(filename) {
+            // Create temporary link simulation
+            const msg = document.createElement('div');
+            msg.className = 'fixed bottom-5 right-5 bg-cyan-500 text-white px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center space-x-3 text-sm font-semibold border border-cyan-300/30';
+            msg.innerHTML = `<i class="fa-solid fa-circle-notch animate-spin"></i><span>Initiating download: ${filename}</span>`;
+            document.body.appendChild(msg);
+
+            setTimeout(() => {
+                msg.className = 'fixed bottom-5 right-5 bg-emerald-600 text-white px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center space-x-3 text-sm font-semibold border border-emerald-300/30';
+                msg.innerHTML = `<i class="fa-solid fa-circle-check"></i><span>Downloaded ${filename} successfully!</span>`;
+                setTimeout(() => {
+                    msg.remove();
+                }, 3000);
+            }, 1200);
+        }
+
+        // Contact Form Submission Simulation
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const successBox = document.getElementById('contact-success');
+            const ticketEl = document.getElementById('ticket-id');
+            const randomTicket = '#PLC-' + Math.floor(1000 + Math.random() * 9000);
+            
+            ticketEl.textContent = randomTicket;
+            successBox.classList.remove('hidden');
+
+            // Reset form
+            document.getElementById('contact-form').reset();
+
+            // Scroll success message into view
+            successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Initial setup on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab('home');
+        });
+    </script>
 </body>
 </html>
