@@ -88,18 +88,25 @@
             <div class="flex items-center justify-between h-20">
                 
                 <!-- Brand / Logo Container -->
-                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
-                    <div class="w-10 h-10 shrink-0 flex items-center justify-center">
-                        <img src="shriyamlogo.png" alt="SHRIYAM CONTROLS Logo" class="w-full h-full object-contain" 
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
-                             onload="this.style.display='block'; this.nextElementSibling.style.display='none';">
-                        <i class="fa-solid fa-microchip text-cyan-400 text-2xl hidden"></i>
-                    </div>
-                    <div>
-                        <span class="text-lg font-bold tracking-wider text-white block leading-tight">SHRIYAM<span class="text-cyan-400"> CONTROLS</span></span>
-                        <span class="text-[10px] text-slate-400 uppercase tracking-widest block mono-text">Industrial IoT & PLC Automation</span>
-                    </div>
-                </div>
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+            <!-- Logo Container (Reduced to 32px) -->
+            <div class="relative flex items-center justify-center w-8 h-8">
+            <!-- Logo Image -->
+            <img src="shriyamlogo.png" alt="SHRIYAM CONTROLS Logo" class="w-full h-full object-contain" 
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
+             onload="this.style.display='block'; this.nextElementSibling.style.display='none';">
+        
+        <!-- Icon Fallback -->
+        <div class="absolute inset-0 items-center justify-center text-cyan-400 text-lg" style="display: none;">
+            <i class="fa-solid fa-microchip"></i>
+        </div>
+    </div>
+    
+    <div>
+        <span class="text-lg font-bold tracking-wider text-white block leading-tight">SHRIYAM<span class="text-cyan-400"> CONTROLS</span></span>
+        <span class="text-[10px] text-slate-400 uppercase tracking-widest block mono-text">Industrial IoT & PLC Automation</span>
+    </div>
+</div>
 
                 <!-- Desktop Navigation Tabs -->
                 <nav class="hidden md:flex space-x-1 bg-slate-900/80 p-1 rounded-xl border border-slate-800">
