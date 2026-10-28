@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SHRIYAM CONTROLS - Engineering Innovations | Industrial Automation Solutions</title>
+    <title>SHRIYAM CONTROLS | Industrial PLC & Automation Solutions</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -73,7 +73,7 @@
     <div class="bg-industrial-900 border-b border-slate-800 text-xs py-1.5 px-4 mono-text text-slate-400 hidden sm:flex justify-between items-center">
         <div class="flex items-center space-x-6">
             <span class="flex items-center"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse inline-block mr-2"></span>SYS_STATUS: ONLINE</span>
-            <span>PROTOCOL: OPC-UA, Modbus</span>
+            <span>PROTOCOL: OPC-UA / MQTT</span>
             <span>LATENCY: &lt;4ms</span>
         </div>
         <div class="flex items-center space-x-4">
@@ -88,12 +88,14 @@
             <div class="flex items-center justify-between h-16">
                 <!-- Brand / Logo -->
                 <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
-                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 text-white font-bold text-xl border border-cyan-400/30">
+                    <!-- Logo Image with Icon Fallback -->
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 text-white font-bold text-xl border border-cyan-400/30 overflow-hidden">
+                        <img src="logo.png" alt="SHRIYAM CONTROLS Logo" class="w-full h-full object-cover hidden" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');" onload="this.classList.remove('hidden');">
                         <i class="fa-solid fa-microchip"></i>
                     </div>
                     <div>
-                        <span class="text-lg font-bold tracking-wider text-white block leading-tight">NEXUS<span class="text-cyan-400">.AUTO</span></span>
-                        <span class="text-[10px] text-slate-400 uppercase tracking-widest block mono-text">Industrial IoT & PLC</span>
+                        <span class="text-lg font-bold tracking-wider text-white block leading-tight">SHRIYAM<span class="text-cyan-400"> CONTROLS</span></span>
+                        <span class="text-[10px] text-slate-400 uppercase tracking-widest block mono-text">Industrial IoT & PLC Automation</span>
                     </div>
                 </div>
 
@@ -158,7 +160,7 @@
                         <div class="lg:col-span-7 space-y-6">
                             <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold tracking-wide uppercase">
                                 <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-                                <span>SHRIYAM CONTROLS</span>
+                                <span>Next-Gen Industrial Automation Platform</span>
                             </div>
                             <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
                                 High-Precision <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">PLC Logic</span> & Industrial IoT Edge
@@ -273,7 +275,7 @@
                         </div>
                         <h3 class="text-xl font-bold text-white mb-3">IoT Gateway Telemetry</h3>
                         <p class="text-slate-400 text-sm leading-relaxed">
-                            Input & Output Commissioning tool
+                            Bridge operational technology (OT) to cloud platforms via MQTT, HTTP, and OPC-UA with built-in end-to-end encryption.
                         </p>
                     </div>
 
@@ -284,7 +286,7 @@
                         </div>
                         <h3 class="text-xl font-bold text-white mb-3">SCADA & HMI Engines</h3>
                         <p class="text-slate-400 text-sm leading-relaxed">
-                            Next product ????.
+                            Web-native HMI dashboards, vector graphics libraries, historical trend logging, and automated alarm email/SMS routing.
                         </p>
                     </div>
 
@@ -295,7 +297,7 @@
                         </div>
                         <h3 class="text-xl font-bold text-white mb-3">Industrial Cyber Security</h3>
                         <p class="text-slate-400 text-sm leading-relaxed">
-                            PLC Software development.
+                            IEC 62443 compliant security stacks, role-based access control (RBAC), and hardware security module support for field devices.
                         </p>
                     </div>
 
@@ -362,14 +364,14 @@
                     <!-- Download Items populated via JS or default markup -->
                     
                     <!-- Item 1 -->
-                    <div class="download-item bg-slate-900/80 border border-slate-800 hover:border-slate-700 rounded-xl p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition" data-category="software" data-name="nexus scada studio editor PLC suite">
+                    <div class="download-item bg-slate-900/80 border border-slate-800 hover:border-slate-700 rounded-xl p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition" data-category="software" data-name="shriyam controls scada studio editor PLC suite">
                         <div class="flex items-start space-x-4">
                             <div class="w-12 h-12 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-xl shrink-0">
                                 <i class="fa-solid fa-desktop"></i>
                             </div>
                             <div>
                                 <div class="flex items-center space-x-3">
-                                    <h3 class="text-lg font-bold text-white">Nexus SCADA Studio v4.20</h3>
+                                    <h3 class="text-lg font-bold text-white">Shriyam SCADA Studio v4.20</h3>
                                     <span class="px-2 py-0.5 rounded text-[10px] font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Windows / Linux</span>
                                 </div>
                                 <p class="text-xs text-slate-400 mt-1">Integrated IDE for designing OPC-UA/Modbus HMI screens, logic debugging, and tag management.</p>
@@ -380,7 +382,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button onclick="triggerDownload('Nexus_SCADA_Studio_v4.20.exe')" class="w-full md:w-auto px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-cyan-500 hover:text-white text-cyan-400 border border-slate-700 text-xs font-semibold flex items-center justify-center space-x-2 transition shrink-0">
+                        <button onclick="triggerDownload('Shriyam_SCADA_Studio_v4.20.exe')" class="w-full md:w-auto px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-cyan-500 hover:text-white text-cyan-400 border border-slate-700 text-xs font-semibold flex items-center justify-center space-x-2 transition shrink-0">
                             <i class="fa-solid fa-download"></i>
                             <span>Download (EXE)</span>
                         </button>
@@ -556,7 +558,7 @@
                                 <h3 class="text-base font-bold text-white">24/7 Field Tech Support</h3>
                                 <p class="text-xs text-slate-400 mt-1">For active plant emergencies and priority hotline support:</p>
                                 <p class="text-sm font-semibold text-cyan-400 mono-text mt-2">+1 (800) 555-0199</p>
-                                <p class="text-xs text-slate-500 mt-0.5">support@nexus-automation.io</p>
+                                <p class="text-xs text-slate-500 mt-0.5">support@shriyamcontrols.com</p>
                             </div>
                         </div>
 
@@ -566,7 +568,7 @@
                                 <i class="fa-solid fa-building"></i>
                             </div>
                             <div>
-                                <h3 class="text-base font-bold text-white">Global Headquarters</h3>
+                                <h3 class="text-base font-bold text-white">Shriyam Controls Headquarters</h3>
                                 <p class="text-xs text-slate-400 mt-1">Industrial Automation Park, Suite 400</p>
                                 <p class="text-xs text-slate-400">Tech Corridor, CA 94016</p>
                                 <div class="mt-3 inline-block text-[11px] px-2.5 py-1 bg-slate-950 rounded text-slate-400 border border-slate-800">
@@ -596,7 +598,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div class="flex items-center space-x-2">
                 <i class="fa-solid fa-microchip text-cyan-400"></i>
-                <span class="text-slate-300 font-semibold">Nexus Automation Solutions</span>
+                <span class="text-slate-300 font-semibold">SHRIYAM CONTROLS</span>
                 <span>&copy; 2026. All Rights Reserved.</span>
             </div>
             <div class="flex space-x-6">
@@ -664,7 +666,8 @@
             "[IoT] Telemetry payload sent: 204 bytes (Success)",
             "[DIAG] CPU Temperature: 42.1°C (Normal)",
             "[S7-1500] DB100 block synchronized.",
-          ];
+            "[MQTT] Publishing to topic 'factory/line1/telemetry'..."
+        ];
         let logIndex = 0;
         setInterval(() => {
             const logContainer = document.getElementById('terminal-log');
