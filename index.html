@@ -77,7 +77,7 @@
             <span>LATENCY: &lt;4ms</span>
         </div>
         <div class="flex items-center space-x-4">
-            <span id="live-clock">2026-10-28 --:--:-- UTC</span>
+            <span id="live-clock">2026-10-28 20:45:53 UTC</span>
             <span class="bg-slate-800 text-cyan-400 px-2 py-0.5 rounded border border-slate-700">v4.2.0-STABLE</span>
         </div>
     </div>
@@ -85,17 +85,16 @@
     <!-- HEADER / NAVIGATION -->
     <header class="sticky top-0 z-50 bg-industrial-900/90 backdrop-blur-md border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="relative flex items-center justify-center w-5 h-5">
-                <!-- Brand / Logo -->
-               <!-- Logo Image -->
-             <img src="shriyamlogo.png" alt="SHRIYAM CONTROLS Logo" class="w-full h-full object-contain" 
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
-             onload="this.style.display='block'; this.nextElementSibling.style.display='none';">
-                    <!-- Logo Image with Icon Fallback -->
-                    
-                        <img src="shriyamlogo.png" alt="SHRIYAM CONTROLS Logo" class="w-full h-full object-cover hidden" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');" onload="this.classList.remove('hidden');">
-                        <i class="fa-solid fa-microchip"></i>
-                    
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Brand / Logo Container -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+                    <div class="w-10 h-10 shrink-0 flex items-center justify-center">
+                        <img src="shriyamlogo.png" alt="SHRIYAM CONTROLS Logo" class="w-full h-full object-contain" 
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
+                             onload="this.style.display='block'; this.nextElementSibling.style.display='none';">
+                        <i class="fa-solid fa-microchip text-cyan-400 text-2xl hidden"></i>
+                    </div>
                     <div>
                         <span class="text-lg font-bold tracking-wider text-white block leading-tight">SHRIYAM<span class="text-cyan-400"> CONTROLS</span></span>
                         <span class="text-[10px] text-slate-400 uppercase tracking-widest block mono-text">Industrial IoT & PLC Automation</span>
@@ -104,15 +103,15 @@
 
                 <!-- Desktop Navigation Tabs -->
                 <nav class="hidden md:flex space-x-1 bg-slate-900/80 p-1 rounded-xl border border-slate-800">
-                    <button onclick="switchTab('home')" id="tab-btn-home" class="nav-tab px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-2">
+                    <button onclick="switchTab('home')" id="tab-btn-home" class="nav-tab px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-2 text-cyan-400 bg-slate-800/80 shadow">
                         <i class="fa-solid fa-house text-xs"></i>
                         <span>Home</span>
                     </button>
-                    <button onclick="switchTab('downloads')" id="tab-btn-downloads" class="nav-tab px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-2">
+                    <button onclick="switchTab('downloads')" id="tab-btn-downloads" class="nav-tab px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-2 text-slate-300 hover:text-white">
                         <i class="fa-solid fa-download text-xs"></i>
                         <span>Downloads</span>
                     </button>
-                    <button onclick="switchTab('contact')" id="tab-btn-contact" class="nav-tab px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-2">
+                    <button onclick="switchTab('contact')" id="tab-btn-contact" class="nav-tab px-6 py-2 rounded-lg text-sm font-medium transition-all duration-200 flex items-center space-x-2 text-slate-300 hover:text-white">
                         <i class="fa-solid fa-headset text-xs"></i>
                         <span>Contact Us</span>
                     </button>
@@ -364,8 +363,6 @@
 
                 <!-- Downloads Table/Cards Container -->
                 <div class="space-y-4" id="downloads-list">
-                    <!-- Download Items populated via JS or default markup -->
-                    
                     <!-- Item 1 -->
                     <div class="download-item bg-slate-900/80 border border-slate-800 hover:border-slate-700 rounded-xl p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition" data-category="software" data-name="shriyam controls scada studio editor PLC suite">
                         <div class="flex items-start space-x-4">
@@ -385,13 +382,12 @@
                                 </div>
                             </div>
                         </div>
-                        <button onclick="triggerDownload('Shriyam IO commissioning tool')" class="w-full md:w-auto px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-cyan-500 hover:text-white text-cyan-400 border border-slate-700 text-xs font-semibold flex items-center justify-center space-x-2 transition shrink-0">
+                        <button onclick="triggerDownload('Shriyam SCADA Studio v4.20')" class="w-full md:w-auto px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-cyan-500 hover:text-white text-cyan-400 border border-slate-700 text-xs font-semibold flex items-center justify-center space-x-2 transition shrink-0">
                             <i class="fa-solid fa-download"></i>
                             <span>Download (EXE)</span>
                         </button>
                     </div>
 
-                    
                     <!-- Item 2 -->
                     <div class="download-item bg-slate-900/80 border border-slate-800 hover:border-slate-700 rounded-xl p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 transition" data-category="manual" data-name="s7 Ethernet IP Profinet hardware specification datasheet manual">
                         <div class="flex items-start space-x-4">
@@ -411,7 +407,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button onclick="triggerDownload('SHRIYAM CONTROLS IO Commissioning tool.pdf')" class="w-full md:w-auto px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-purple-500 hover:text-white text-purple-400 border border-slate-700 text-xs font-semibold flex items-center justify-center space-x-2 transition shrink-0">
+                        <button onclick="triggerDownload('PROFINET & Ethernet/IP Wiring Guide')" class="w-full md:w-auto px-5 py-2.5 rounded-lg bg-slate-800 hover:bg-purple-500 hover:text-white text-purple-400 border border-slate-700 text-xs font-semibold flex items-center justify-center space-x-2 transition shrink-0">
                             <i class="fa-solid fa-file-pdf"></i>
                             <span>Download (PDF)</span>
                         </button>
@@ -447,99 +443,74 @@
                             <i class="fa-solid fa-circle-check text-lg mt-0.5"></i>
                             <div>
                                 <span class="font-bold block">Inquiry Transmitted Successfully!</span>
-                                <span>A automation specialist will review your telemetry & query within 4 business hours. Ticket ID: <span id="ticket-id" class="mono-text font-bold">#PLC-9921</span></span>
+                                <span>An automation specialist will review your telemetry & query within 4 business hours. Ticket ID: <span id="ticket-id" class="mono-text font-bold">#PLC-9921</span></span>
                             </div>
                         </div>
 
-                        <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-5">
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <form onsubmit="handleContactSubmit(event)" class="space-y-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Full Name *</label>
-                                    <input type="text" required placeholder="e.g., Gregg Pret" 
-                                           class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition">
+                                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Engineer Name</label>
+                                    <input type="text" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-cyan-500" placeholder="e.g. Arun Kumar">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Corporate Email *</label>
-                                    <input type="email" required placeholder="vijithakaipu@gmail.com" 
-                                           class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition">
+                                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Corporate Email</label>
+                                    <input type="email" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-cyan-500" placeholder="name@company.com">
                                 </div>
                             </div>
-
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                                <div>
-                                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Primary Subject</label>
-                                    <select class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition">
-                                        <option>PLC Programming & Logic Support</option>
-                                        <option>SCADA & HMI Integration</option>
-                                        <option>Industrial IoT Gateway Setup</option>
-                                        <option>Custom Driver Development</option>
-                                        <option>General Hardware Sales Inquiry</option>
-                                        <option>Custom built Python IO commissioning tool</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">PLC Hardware Brand</label>
-                                    <select class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition">
-                                        <option>Siemens Simatic (S7-1200 / S7-1500)</option>
-                                        <option>Rockwell / Allen-Bradley ControlLogix</option>
-                                        <option>Schneider Modicon</option>
-                                        <option>Omron / Beckhoff</option>
-                                        <option>Other / Multi-vendor</option>
-                                    </select>
-                                </div>
-                            </div>
-
                             <div>
-                                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">System Details & Requirements *</label>
-                                <textarea rows="4" required placeholder="Describe your industrial setup, IO count, communication protocols, or issues..." 
-                                          class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 transition"></textarea>
+                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Controller / Protocol Focus</label>
+                                <select class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-cyan-500">
+                                    <option>Siemens S7-1200 / S7-1500 (PROFINET)</option>
+                                    <option>Allen-Bradley ControlLogix (Ethernet/IP)</option>
+                                    <option>Modbus TCP / RTU Gateway Integration</option>
+                                    <option>OPC-UA / MQTT Cloud Telemetry</option>
+                                </select>
                             </div>
-
-                            <button type="submit" class="w-full py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold rounded-lg shadow-lg shadow-cyan-500/20 transition flex items-center justify-center space-x-2">
-                                <i class="fa-solid fa-paper-plane"></i>
-                                <span>Send Support Request</span>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Technical Description / Query</label>
+                                <textarea rows="4" required class="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-cyan-500" placeholder="Detail your control network topology or software integration requirements..."></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-semibold shadow-lg shadow-cyan-500/25 transition">
+                                Transmit Support Ticket
                             </button>
                         </form>
                     </div>
 
-                    <!-- Contact Details & Info Cards -->
+                    <!-- Contact Details Sidebar -->
                     <div class="lg:col-span-5 space-y-6">
-                        <!-- Card 1 -->
-                        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex items-start space-x-4">
-                            <div class="w-12 h-12 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-xl shrink-0">
-                                <i class="fa-solid fa-headset"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-base font-bold text-white">24/7 Field Tech Support</h3>
-                                <p class="text-xs text-slate-400 mt-1">For active plant emergencies and priority hotline support:</p>
-                                <p class="text-sm font-semibold text-cyan-400 mono-text mt-2">+1 (800) 555-0199</p>
-                                <p class="text-xs text-slate-500 mt-0.5">vijithakaipu@gmail.com</p>
-                            </div>
-                        </div>
-
-                        <!-- Card 2 -->
-                        <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex items-start space-x-4">
-                            <div class="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center text-xl shrink-0">
-                                <i class="fa-solid fa-building"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-base font-bold text-white">Shriyam Controls Headquarters</h3>
-                                <p class="text-xs text-slate-400 mt-1">Reading, Alfred 20, </p>
-                                <p class="text-xs text-slate-400">United Kingdom </p>
-                                <div class="mt-3 inline-block text-[11px] px-2.5 py-1 bg-slate-950 rounded text-slate-400 border border-slate-800">
-                                    <i class="fa-solid fa-clock text-cyan-400 mr-1"></i> Business Hours: 08:00 - 18:00 PST
+                        <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 sm:p-8 space-y-6">
+                            <h2 class="text-xl font-bold text-white">Direct Engineering Desk</h2>
+                            
+                            <div class="flex items-start space-x-4">
+                                <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 uppercase font-semibold tracking-wider">Direct Dispatch</p>
+                                    <p class="text-sm text-white font-medium mt-0.5">support@shriyamcontrols.com</p>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Security Note -->
-                        <div class="bg-slate-900/50 border border-slate-800/80 p-6 rounded-2xl">
-                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2 flex items-center">
-                                <i class="fa-solid fa-user-shield text-emerald-400 mr-2"></i> Encrypted Communication
-                            </h4>
-                            <p class="text-xs text-slate-400 leading-relaxed">
-                                All telemetry data and system architectural diagrams shared with our engineering team are protected under standard non-disclosure protocols (NDA) and TLS encrypted channels.
-                            </p>
+                            <div class="flex items-start space-x-4">
+                                <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-clock"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 uppercase font-semibold tracking-wider">Telemetry Monitoring SLA</p>
+                                    <p class="text-sm text-white font-medium mt-0.5">24 / 7 / 365 Active Response</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start space-x-4">
+                                <div class="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-400 uppercase font-semibold tracking-wider">Security & Encryption</p>
+                                    <p class="text-sm text-white font-medium mt-0.5">TLS 1.3 End-to-End Encrypted Handshake</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -549,124 +520,42 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-industrial-900 border-t border-slate-800 text-slate-400 py-8 text-xs">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div class="flex items-center space-x-2">
-                <i class="fa-solid fa-microchip text-cyan-400"></i>
-                <span class="text-slate-300 font-semibold">SHRIYAM CONTROLS</span>
-                <span>&copy; 2026. All Rights Reserved.</span>
-            </div>
+    <footer class="bg-industrial-900 border-t border-slate-800 py-8 text-center text-xs text-slate-500 mono-text">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>&copy; 2026 SHRIYAM CONTROLS. All rights reserved. • <span class="text-cyan-400">beyond Automation</span></p>
             <div class="flex space-x-6">
-                <a href="javascript:void(0)" onclick="switchTab('home')" class="hover:text-cyan-400 transition">Home</a>
-                <a href="javascript:void(0)" onclick="switchTab('downloads')" class="hover:text-cyan-400 transition">Downloads</a>
-                <a href="javascript:void(0)" onclick="switchTab('contact')" class="hover:text-cyan-400 transition">Contact Us</a>
+                <span class="hover:text-slate-300 cursor-pointer">IEC 61131-3</span>
+                <span class="hover:text-slate-300 cursor-pointer">OPC Foundation</span>
+                <span class="hover:text-slate-300 cursor-pointer">Privacy & Telemetry</span>
             </div>
         </div>
     </footer>
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- JavaScript Controllers -->
     <script>
-        // Tab Switcher Logic
         function switchTab(tabId) {
             // Hide all tab contents
-            const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => {
-                content.classList.add('hidden');
-            });
-
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             // Show target tab
-            const target = document.getElementById(`section-${tabId}`);
-            if (target) {
-                target.classList.remove('hidden');
-            }
+            const target = document.getElementById('section-' + tabId);
+            if (target) target.classList.remove('hidden');
 
-            // Update Active Styles on Nav Buttons
-            const buttons = document.querySelectorAll('.nav-tab');
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-cyan-500', 'text-white', 'shadow-md');
-                btn.classList.add('text-slate-400', 'hover:text-white');
+            // Update desktop navigation active buttons
+            document.querySelectorAll('.nav-tab').forEach(btn => {
+                btn.classList.remove('text-cyan-400', 'bg-slate-800/80', 'shadow');
+                btn.classList.add('text-slate-300', 'hover:text-white');
             });
-
-            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            const activeBtn = document.getElementById('tab-btn-' + tabId);
             if (activeBtn) {
-                activeBtn.classList.remove('text-slate-400', 'hover:text-white');
-                activeBtn.classList.add('bg-cyan-500', 'text-white', 'shadow-md');
+                activeBtn.classList.remove('text-slate-300', 'hover:text-white');
+                activeBtn.classList.add('text-cyan-400', 'bg-slate-800/80', 'shadow');
             }
-
-            // Scroll to top smooth
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Mobile Menu Toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('hidden');
-        }
-
-        // Live UTC Clock for Telemetry Bar
-        function updateClock() {
-            const now = new Date();
-            const utcString = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
-            const clockEl = document.getElementById('live-clock');
-            if (clockEl) {
-                clockEl.textContent = utcString;
-            }
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // Simulated Live Terminal Logs on Hero
-        const logLines = [
-            "[PLC] Modbus TCP Read: Address 40012 -> Value: 894 RPM",
-            "[IoT] Telemetry payload sent: 204 bytes (Success)",
-            "[DIAG] CPU Temperature: 42.1°C (Normal)",
-            "[S7-1500] DB100 block synchronized.",
-            "[MQTT] Publishing to topic 'factory/line1/telemetry'..."
-        ];
-        let logIndex = 0;
-        setInterval(() => {
-            const logContainer = document.getElementById('terminal-log');
-            if (logContainer) {
-                const newP = document.createElement('p');
-                newP.className = 'text-slate-300';
-                newP.textContent = logLines[logIndex % logLines.length];
-                logContainer.appendChild(newP);
-                logIndex++;
-                if (logContainer.children.length > 8) {
-                    logContainer.removeChild(logContainer.children[0]);
-                }
-                logContainer.scrollTop = logContainer.scrollHeight;
-            }
-        }, 3000);
-
-        // Downloads Filter Logic
-        function filterCategory(cat) {
-            // Highlight filter buttons
-            const buttons = document.querySelectorAll('.cat-filter-btn');
-            buttons.forEach(btn => {
-                if (btn.getAttribute('data-cat') === cat) {
-                    btn.classList.remove('bg-slate-800', 'text-slate-300');
-                    btn.classList.add('bg-cyan-500', 'text-white');
-                } else {
-                    btn.classList.remove('bg-cyan-500', 'text-white');
-                    btn.classList.add('bg-slate-800', 'text-slate-300');
-                }
-            });
-
-            const items = document.querySelectorAll('.download-item');
-            let visibleCount = 0;
-
-            items.forEach(item => {
-                const itemCat = item.getAttribute('data-category');
-                if (cat === 'all' || itemCat === cat) {
-                    item.classList.remove('hidden');
-                    visibleCount++;
-                } else {
-                    item.classList.add('hidden');
-                }
-            });
-
-            checkEmptyDownloads(visibleCount);
         }
 
         function filterDownloads() {
@@ -675,65 +564,63 @@
             let visibleCount = 0;
 
             items.forEach(item => {
-                const nameData = item.getAttribute('data-name').toLowerCase();
-                if (nameData.includes(query)) {
-                    item.classList.remove('hidden');
+                const name = item.getAttribute('data-name').toLowerCase();
+                const text = item.textContent.toLowerCase();
+                if (name.includes(query) || text.includes(query)) {
+                    item.style.display = 'flex';
                     visibleCount++;
                 } else {
-                    item.classList.add('hidden');
+                    item.style.display = 'none';
                 }
             });
 
-            checkEmptyDownloads(visibleCount);
-        }
-
-        function checkEmptyDownloads(count) {
             const noDownloads = document.getElementById('no-downloads');
-            if (count === 0) {
+            if (visibleCount === 0) {
                 noDownloads.classList.remove('hidden');
             } else {
                 noDownloads.classList.add('hidden');
             }
         }
 
-        // Trigger Sample File Download Notification
-        function triggerDownload(filename) {
-            // Create temporary link simulation
-            const msg = document.createElement('div');
-            msg.className = 'fixed bottom-5 right-5 bg-cyan-500 text-white px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center space-x-3 text-sm font-semibold border border-cyan-300/30';
-            msg.innerHTML = `<i class="fa-solid fa-circle-notch animate-spin"></i><span>Initiating download: ${filename}</span>`;
-            document.body.appendChild(msg);
+        function filterCategory(category) {
+            document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-cyan-500', 'text-white');
+                btn.classList.add('bg-slate-800', 'text-slate-300');
+            });
+            event.target.classList.remove('bg-slate-800', 'text-slate-300');
+            event.target.classList.add('bg-cyan-500', 'text-white');
 
-            setTimeout(() => {
-                msg.className = 'fixed bottom-5 right-5 bg-emerald-600 text-white px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center space-x-3 text-sm font-semibold border border-emerald-300/30';
-                msg.innerHTML = `<i class="fa-solid fa-circle-check"></i><span>Downloaded ${filename} successfully!</span>`;
-                setTimeout(() => {
-                    msg.remove();
-                }, 3000);
-            }, 1200);
+            const items = document.querySelectorAll('.download-item');
+            let visibleCount = 0;
+
+            items.forEach(item => {
+                const cat = item.getAttribute('data-category');
+                if (category === 'all' || cat === category) {
+                    item.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            const noDownloads = document.getElementById('no-downloads');
+            if (visibleCount === 0) {
+                noDownloads.classList.remove('hidden');
+            } else {
+                noDownloads.classList.add('hidden');
+            }
         }
 
-        // Contact Form Submission Simulation
+        function triggerDownload(fileName) {
+            alert('Initiating secure download package for: ' + fileName);
+        }
+
         function handleContactSubmit(event) {
             event.preventDefault();
-            const successBox = document.getElementById('contact-success');
-            const ticketEl = document.getElementById('ticket-id');
-            const randomTicket = '#PLC-' + Math.floor(1000 + Math.random() * 9000);
-            
-            ticketEl.textContent = randomTicket;
-            successBox.classList.remove('hidden');
-
-            // Reset form
-            document.getElementById('contact-form').reset();
-
-            // Scroll success message into view
-            successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            document.getElementById('contact-success').classList.remove('hidden');
+            event.target.reset();
+            window.scrollTo({ top: 400, behavior: 'smooth' });
         }
-
-        // Initial setup on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            switchTab('home');
-        });
     </script>
 </body>
 </html>
