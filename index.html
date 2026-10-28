@@ -85,9 +85,12 @@
     <!-- HEADER / NAVIGATION -->
     <header class="sticky top-0 z-50 bg-industrial-900/90 backdrop-blur-md border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
+            <div class="relative flex items-center justify-center w-10 h-10">
                 <!-- Brand / Logo -->
-                <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+               <!-- Logo Image -->
+             <img src="shriyamlogo.png" alt="SHRIYAM CONTROLS Logo" class="w-full h-full object-contain" 
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
+             onload="this.style.display='block'; this.nextElementSibling.style.display='none';">
                     <!-- Logo Image with Icon Fallback -->
                     
                         <img src="shriyamlogo.png" alt="SHRIYAM CONTROLS Logo" class="w-full h-full object-cover hidden" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');" onload="this.classList.remove('hidden');">
